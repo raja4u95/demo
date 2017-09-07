@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<project name="P6 Web Services Client Demo Application" default="jar" basedir=".">
+
+    <path id="classes.classpath">
+        <pathelement location="${basedir}/lib/p6ws-jaxws-client.jar" />
+        <pathelement location="${basedir}/lib/cxf-bundle.jar" />
+        <pathelement location="${basedir}/lib/osdt_core.jar" />
+        <pathelement location="${basedir}/lib/osdt_wss.jar" />
+        <pathelement location="${basedir}/lib/osdt_xmlsec.jar" />
+        <pathelement location="${basedir}/lib/osdt_saml.jar" />
+        <pathelement location="${basedir}/lib/osdt_saml2.jar" />
+        <pathelement location="${basedir}/lib/wss4j.jar" />
+    </path>
+
+    <target name="compile" description="compile the Demo App">
+        <mkdir dir="${basedir}/bin" />
+        <javac debug="true" destdir="${basedir}/bin" srcdir="${basedir}/src">
+            <classpath>
+                <path refid="classes.classpath" />
+            </classpath>
+            <include name="**/*.java" />
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="Prepare the demo jar">
+        <jar destfile="${basedir}/p6wsdemo.jar" basedir="${basedir}/bin" manifest="${basedir}/META-INF/MANIFEST.MF" update="true" />
+    </target>
+
+    <target description="clean up from a previous build" name="clean">
+        <delete dir="${basedir}/bin" />
+        <delete file="${basedir}/p6wsdemo.jar" />
+    </target>
+
+</project>
